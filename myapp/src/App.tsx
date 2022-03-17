@@ -1,8 +1,13 @@
 import React from "react";
-import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import { LayoutComponent } from "./components/layout/LayoutComponent";
 
 function App() {
-  return <div>Hello</div>;
+  return (
+    <BrowserRouter>
+      <LayoutComponent />
+    </BrowserRouter>
+  );
 }
 
 export default App;
