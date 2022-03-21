@@ -1,5 +1,12 @@
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import {
+  styled,
+  useTheme,
+  Theme,
+  CSSObject,
+  makeStyles,
+  createStyles,
+} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -24,6 +31,7 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
+import { blue, grey } from "@mui/material/colors";
 
 const iconData = [
   <AccountBoxIcon />,
@@ -31,6 +39,8 @@ const iconData = [
   <ContactPageIcon />,
   <LogoutIcon />,
 ];
+
+const primary = grey[900];
 
 const routePath = [
   "/",
@@ -220,5 +230,6 @@ export default function MiniDrawer() {
         <Typography paragraph></Typography>
       </Box>
     </Box>
+    //{" "}
   );
 }
