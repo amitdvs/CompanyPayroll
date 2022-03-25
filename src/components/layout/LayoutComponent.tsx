@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Sidebar from "./sidebar/Sidebar";
-import { Box } from "@mui/material";
-import { Dashboard } from "./views/Dashboard";
-import { Logout } from "./views/Logout";
-import { Contact } from "./views/Contact";
-import { Employees } from "./views/Employees";
-import { Allmails } from "./views/Allmails";
-import { Sendmails } from "./views/Sendmails";
-import { Inbox } from "./views/Inbox";
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Sidebar from './sidebar/Sidebar'
+import { Box } from '@mui/material'
+import { Dashboard } from './views/Dashboard'
+import { Logout } from './views/Logout'
+import { Contact } from './views/Contact'
+import Employees from './views/Employees'
+import { Allmails } from './views/Allmails'
+import { Sendmails } from './views/Sendmails'
+import { Inbox } from './views/Inbox'
 
 export function LayoutComponent() {
   return (
@@ -26,5 +26,5 @@ export function LayoutComponent() {
         </Routes>
       </Box>
     </div>
-  );
+  )
 }
