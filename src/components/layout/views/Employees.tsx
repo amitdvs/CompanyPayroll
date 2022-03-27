@@ -9,6 +9,7 @@ import { PageTitle } from '../common/PageTitle'
 
 import * as React from 'react'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import Sidebar from '../sidebar/Sidebar'
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
