@@ -10,6 +10,8 @@ import { PageTitle } from '../common/PageTitle'
 import * as React from 'react'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
 import Sidebar from '../sidebar/Sidebar'
+import { Typography } from '@mui/material'
+import FirebaseContent from '../../pages/FirebaseContent'
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -46,14 +48,18 @@ const rows = [
 
 export default function Employees() {
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
+    <>
+      {/* <Typography style={{ fontSize: 30, marginLeft: 110 }}>Employees Page</Typography>
+      <div style={{ marginLeft: 100, height: 370, width: '80%' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        /> */}
+      {/* </div> */}
+      <FirebaseContent />
+    </>
   )
 }

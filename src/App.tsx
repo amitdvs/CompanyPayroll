@@ -1,18 +1,8 @@
-// import { app } from './config/firebase-config.js'
-import { initializeApp } from 'firebase/app'
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
-import { LayoutComponent } from './components/layout/LayoutComponent'
+import { useState, useEffect } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import theme from './styles/theme'
 import { ThemeProvider } from '@mui/material'
 import Form from './components/layout/common/Form'
-import { config } from './config/firebase-config'
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  getAdditionalUserInfo,
-} from 'firebase/auth'
 
 import { Dashboard } from './components/layout/views/Dashboard'
 import { Logout } from './components/layout/views/Logout'
@@ -25,12 +15,14 @@ import Sidebar from './components/layout/sidebar/Sidebar'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+import firebase from 'firebase'
+import AddEdit from './components/pages/AddEdit'
+import ViewPage from './components/pages/ViewPage'
+
 export enum userResponse {
   login,
   register,
 }
-
-initializeApp(config.firebaseConfig)
 
 function App() {
   const [email, setEmail] = useState<string>('')
@@ -44,15 +36,16 @@ function App() {
   }, [])
   let navigate = useNavigate()
   const handleAction = (id: userResponse) => {
-    const authentication = getAuth()
+    const authentication = firebase.auth()
     if (id === userResponse.register) {
-      createUserWithEmailAndPassword(authentication, email, password)
-        .then((response) => {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((response: any) => {
           navigate('/')
-          const details = getAdditionalUserInfo(response)
-          // sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
+          sessionStorage.setItem('Auth token', response.user.refreshToken)
         })
-        .catch((error) => {
+        .catch((error: any) => {
           console.log(error.code)
           if (error.code === 'auth/wrong-password') {
             toast.error('Please check the Password')
@@ -63,12 +56,14 @@ function App() {
         })
     }
     if (id === userResponse.login) {
-      signInWithEmailAndPassword(authentication, email, password)
-        .then((response) => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((response: any) => {
           navigate('/')
-          // sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
+          sessionStorage.setItem('Auth Token', response.user.refreshToken)
         })
-        .catch((error) => {
+        .catch((error: any) => {
           console.log(error.code)
           if (error.code === 'auth/email-already-in-use') {
             toast.error('Email Already in Use')
@@ -78,10 +73,8 @@ function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      {/* <BrowserRouter> */}
       <ToastContainer autoClose={5000} />
       <Routes>
-        {/* <Route path="/" element={<LayoutComponent />} /> */}
         <Route
           path="/login"
           element={
@@ -107,19 +100,18 @@ function App() {
           }
         />
         <Route path="/" element={<Sidebar />}>
-          {/* <Sidebar /> */}
-          {/* {console.log('Hello')} */}
           <Route path="/" element={<Dashboard />} />
-
           <Route path="employees" element={<Employees />} />
           <Route path="contact" element={<Contact />} />
           <Route path="logout" element={<Logout />} />
           <Route path="allmails" element={<Allmails />} />
           <Route path="inbox" element={<Inbox />} />
           <Route path="sendmails" element={<Sendmails />} />
+          <Route path="addedit" element={<AddEdit />} />
+          <Route path="update/:id" element={<AddEdit />} />
+          <Route path="view/:id" element={<ViewPage />} />
         </Route>
       </Routes>
-      {/* </BrowserRouter> */}
     </ThemeProvider>
   )
 }

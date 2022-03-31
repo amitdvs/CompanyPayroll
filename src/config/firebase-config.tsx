@@ -1,5 +1,6 @@
 // import { initializeApp } from 'firebase/app'
-// import { getFirestore } from 'firebase/firestore'
+import firebase from 'firebase/app'
+import 'firebase/database'
 
 export const config = {
   firebaseConfig: {
@@ -12,7 +13,7 @@ export const config = {
     appId: '1:351440862222:web:2da743c0d70c1ce94e105f',
   },
 }
-// console.log('hello')
 
-// export const app = initializeApp(firebaseConfig)
-// export const database = getFirestore(app)
+export const fireAuth = firebase.initializeApp(config.firebaseConfig)
+export default firebase.database().ref()
+// export const contactRef = databaseRef.child('contacts')

@@ -109,17 +109,17 @@ export default function MiniDrawer() {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
   let navigate = useNavigate()
-  // useEffect(() => {
-  //   let authToken = sessionStorage.getItem('Auth Token')
+  useEffect(() => {
+    let authToken = sessionStorage.getItem('Auth Token')
 
-  //   if (authToken) {
-  //     navigate('/')
-  //   }
+    if (authToken) {
+      navigate('/')
+    }
 
-  //   if (!authToken) {
-  //     navigate('/login')
-  //   }
-  // }, [])
+    if (!authToken) {
+      navigate('/register')
+    }
+  }, [])
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -130,6 +130,10 @@ export default function MiniDrawer() {
 
   const handleClick = () => {
     navigate('/login')
+  }
+
+  const handleAddButtonClick = () => {
+    navigate('/addedit')
   }
 
   return (
@@ -155,12 +159,24 @@ export default function MiniDrawer() {
             <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
               Doon Valley Softech
             </Typography>
-            {/* <Link to="/login">Login</Link> */}
             <Stack direction="row" spacing={2}>
-              <Button color="inherit" onClick={() => handleClick()}>
-                Login
+              <Button color="inherit" onClick={() => handleAddButtonClick()}>
+                Add Employees
               </Button>
             </Stack>
+            {sessionStorage.getItem('Auth Token') ? (
+              <Stack direction="row" spacing={2}>
+                <Button color="inherit" onClick={() => handleClick()}>
+                  Log Out
+                </Button>
+              </Stack>
+            ) : (
+              <Stack direction="row" spacing={2}>
+                <Button color="inherit" onClick={() => handleClick()}>
+                  Logout
+                </Button>
+              </Stack>
+            )}
           </Toolbar>
         </AppBar>
 
